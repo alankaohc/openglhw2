@@ -170,6 +170,9 @@ void processInput(GLFWwindow* window)
     else if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) {
         shaderNow = 8;
     }
+    else if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
+        shaderNow = 9;
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
