@@ -64,7 +64,7 @@ void main()
                 vec4 color = vec4(0,0,0,0);
                 vec2 img_size = vec2(800, 600);
                 int n = 0;
-                int half_size = 3;
+                int half_size = 4;
                 for (int i = -half_size; i <= half_size; i++) {
                     for (int j = -half_size; j <= half_size; j++) {
                         vec4 c = texture(screenTexture, TexCoords + vec2(i,j)/img_size);
@@ -128,8 +128,30 @@ void main()
             }
             break;
         case 8:
+            if (gl_FragCoord.x > barXL && gl_FragCoord.x < barXR) {
+                FragColor = vec4(1.0,1.0,1.0,1.0);
+            } else if (gl_FragCoord.x < barXL){
+                FragColor = texture(screenTexture, TexCoords);
+            } else {
+                vec4 color = vec4(0,0,0,0);
+                vec2 img_size = vec2(800, 600);
+                int n = 0;
+                int half_size = 1;
+                for (int i = -half_size; i <= half_size; i++) {
+                    for (int j = -half_size; j <= half_size; j++) {
+                        vec4 c = texture(screenTexture, TexCoords + vec2(i,j)/img_size);
+                        color += c;
+                        n++;
+                    }   
+                }
+                color = color / (n);
+                
+                color.x = pow(color.x+0.5, 1.5)-0.5;
+                color.y = pow(color.y+0.5, 1.5)-0.5;
+                color.z = pow(color.z+0.5, 1.5)-0.5;
+                FragColor = color;
             
-            
+            }
             break;
     }
     
